@@ -1,16 +1,20 @@
 # bootcamp
 
-A new Flutter project.
+Project ini menggunakan provider sebagai state management. Semua provider yang ada dideklarasikan terlebih dahulu di dalam widget MultiProvider yang terdapat pada file main.dart. Untuk pemanggilan API terdapat pada folder services yang kemudian baru akan dipanggil oleh provider.
 
-## Getting Started
+## All posts
+- Fungsi getPosts pada PostService akan dipanggil di dalam fungsi getPosts dari PostProvider dengan await.
+- Setelah fungsi getPosts pada PostService selesai dieksekusi, masukkan hasil dari getPosts ke dalam variabel posts.
+- Panggil notifyListener untuk memperbarui tampilan layar.
+- Dengan menggunakan Consumer<PostProvider>, ambil variabel posts di dalam PostScreen.
+- Masukkan variabel posts pada ListView.
+![All posts](all_posts.jpg?raw=true "Title")
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Search post
+- Fungsi getPost dengan parameter id pada PostService akan dipanggil di dalam fungsi getPost dari PostProvider dengan await.
+- Setelah fungsi getPost dengan parameter id pada PostService selesai dieksekusi, masukkan hasil dari getPost dengan id ke dalam variabel posts.
+- Panggil notifyListener untuk memperbarui tampilan layar.
+- Setiap kali inputan TextField berubah, akan memanggil fungsi getPost dari PostProvider sesuai dengan id yang dimasukkan.
+- Dengan menggunakan Consumer<PostProvider>, ambil variabel posts di dalam PostScreen.
+- Masukkan variabel posts pada ListView.
+![Search posts](search_posts.jpg?raw=true "Title")
