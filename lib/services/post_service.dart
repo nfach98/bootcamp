@@ -22,7 +22,7 @@ class PostService {
     }
   }
 
-  Future<PostModel> getPost({required int id}) async {
+  Future<PostModel?> getPost({required int id}) async {
     final response = await http.get(
       Uri.parse('$baseUrl/posts/$id'),
       headers:  {
@@ -33,7 +33,7 @@ class PostService {
     if (response.statusCode == 200) {
       return PostModel.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Failed to load posts');
+      return null;
     }
   }
 }

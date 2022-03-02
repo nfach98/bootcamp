@@ -1,6 +1,5 @@
 import 'package:bootcamp/models/post_model.dart';
 import 'package:bootcamp/providers/post_provider.dart';
-import 'package:bootcamp/screens/post_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +11,8 @@ class PostScreen extends StatefulWidget {
 }
 
 class _PostScreenState extends State<PostScreen> {
+
+  TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
@@ -29,45 +30,52 @@ class _PostScreenState extends State<PostScreen> {
 
         return Scaffold(
           appBar: AppBar(
-            title: const Text("Posts"),
+            title: TextField(
+              controller: searchController,
+              keyboardType: const TextInputType.numberWithOptions(
+                signed: false,
+                decimal: false
+              ),
+              decoration: const InputDecoration(
+                hintText: "Search by id"
+              ),
+              onChanged: (value) {
+                if (value.isNotEmpty) {
+                  try {
+                    int id = int.parse(value);
+                    Provider.of<PostProvider>(context, listen: false).getPost(id: id);
+                  }
+                  catch(e) {
+                    print("Not a number");
+                  }
+                }
+                else {
+                  Provider.of<PostProvider>(context, listen: false).getPosts();
+                }
+              },
+            ),
           ),
           body: ListView.separated(
             itemCount: posts.length,
-            itemBuilder: (_, index) {
-              return InkWell(
-                onTap: () {
-                  if (posts[index].id != null) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => PostDetailScreen(id: posts[index].id!))
-                    );
-                  }
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        posts[index].title ?? "",
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        posts[index].body ?? "",
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
+            itemBuilder: (_, index) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "${posts[index].id ?? ""} - ${posts[index].title ?? ""}",
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold
+                    ),
                   ),
-                ),
-              );
-            },
+                  const SizedBox(height: 4),
+                  Text(
+                    posts[index].body ?? "",
+                  ),
+                ],
+              ),
+            ),
             separatorBuilder: (_, index) => const SizedBox(height: 12),
           ),
         );

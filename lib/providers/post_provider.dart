@@ -17,7 +17,11 @@ class PostProvider with ChangeNotifier {
 
   void getPost({required int id}) async {
     await service.getPost(id: id).then((value) {
-      post = value;
+      if (value != null) {
+        posts = [value];
+      } else {
+        posts = [];
+      }
     });
     notifyListeners();
   }
