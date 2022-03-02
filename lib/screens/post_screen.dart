@@ -36,8 +36,27 @@ class _PostScreenState extends State<PostScreen> {
                 signed: false,
                 decimal: false
               ),
-              decoration: const InputDecoration(
-                hintText: "Search by id"
+              style: const TextStyle(
+                color: Colors.white
+              ),
+              decoration: InputDecoration(
+                hintText: "Search by id",
+                hintStyle: const TextStyle(
+                  color: Colors.white38
+                ),
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    if (searchController.text.isNotEmpty) {
+                      searchController.clear();
+                      Provider.of<PostProvider>(context, listen: false).getPosts();
+                    }
+                  },
+                  splashRadius: 16,
+                  icon: const Icon(
+                    Icons.close_rounded,
+                    color: Colors.white,
+                  ),
+                ),
               ),
               onChanged: (value) {
                 if (value.isNotEmpty) {
