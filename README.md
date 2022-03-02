@@ -8,7 +8,8 @@ Project ini menggunakan provider sebagai state management. Semua provider yang a
 - Panggil notifyListener untuk memperbarui tampilan layar.
 - Dengan menggunakan Consumer<PostProvider>, ambil variabel posts di dalam PostScreen.
 - Masukkan variabel posts pada ListView.
-![all_posts](https://user-images.githubusercontent.com/48285366/156373021-33916807-a789-4e05-acc5-2306b923d740.png)
+
+![all_posts](https://user-images.githubusercontent.com/48285366/156373040-d217fdc6-22fb-4cd4-9ac5-a0eb26cd0280.png)
 
 ## Search post
 - Fungsi getPost dengan parameter id pada PostService akan dipanggil di dalam fungsi getPost dari PostProvider dengan await.
@@ -17,4 +18,5 @@ Project ini menggunakan provider sebagai state management. Semua provider yang a
 - Setiap kali inputan TextField berubah, akan memanggil fungsi getPost dari PostProvider sesuai dengan id yang dimasukkan.
 - Dengan menggunakan Consumer<PostProvider>, ambil variabel posts di dalam PostScreen.
 - Masukkan variabel posts pada ListView.
-![search_post](https://user-images.githubusercontent.com/48285366/156373040-d217fdc6-22fb-4cd4-9ac5-a0eb26cd0280.png)
+  
+![search_post](https://user-images.githubusercontent.com/48285366/156373021-33916807-a789-4e05-acc5-2306b923d740.png)
